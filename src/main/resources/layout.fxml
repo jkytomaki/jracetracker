@@ -1,0 +1,65 @@
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import com.sun.javafx.scene.control.skin.InputField?>
+<?import javafx.scene.control.TextField?>
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0"
+          xmlns:fx="http://javafx.com/fxml"
+          >
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+    </padding>
+
+    <Label style="-fx-font: NORMAL 20 Tahoma;" text="Lap Reader" GridPane.columnIndex="0" GridPane.rowIndex="0"
+           GridPane.hgrow="ALWAYS">
+    </Label>
+    <Label fx:id="runningIndicator" style="-fx-font: NORMAL 20 Tahoma;" text="Create heat to start"
+           GridPane.columnIndex="1" GridPane.rowIndex="0"
+           GridPane.hgrow="ALWAYS">
+    </Label>
+    <FlowPane GridPane.columnIndex="2" GridPane.rowIndex="0">
+        <ComboBox fx:id="heatSelector"/>
+        <TextField fx:id="heatNameInput" />
+        <Button fx:id="newHeatButton" text="NEW HEAT"/>
+        <Button fx:id="resetButton" text="RESET"/>
+        <Button fx:id="finishButton" text="FINISH"/>
+        <Button fx:id="copyButton" text="COPY"/>
+    </FlowPane>
+
+
+    <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS"
+               GridPane.vgrow="ALWAYS"
+               GridPane.rowIndex="1"
+                GridPane.columnSpan="4">
+        <columns>
+            <TableColumn text="Time" prefWidth="200">
+                <cellValueFactory>
+                    <PropertyValueFactory property="created" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Ponder #" prefWidth="150">
+                <cellValueFactory>
+                    <PropertyValueFactory property="ponder" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Lap no" prefWidth="150">
+                <cellValueFactory>
+                    <PropertyValueFactory property="lapNumber" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Lap time" prefWidth="150" fx:id="lapTimeColumn">
+                <cellValueFactory>
+                    <PropertyValueFactory property="lapTime" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+</GridPane>
