@@ -39,7 +39,11 @@ public class OpenLapSerialListener implements SerialEventListener {
 
 
     private synchronized void parseLine(String line) {
-        logger.debug("Read line '{}'", line);
+        logger.debug("> {}", line);
+        if (line.indexOf("#")!=-1){
+            return;
+        }
+
         List<String> parts = Splitter.on(CharMatcher.BREAKING_WHITESPACE).splitToList(line);
         if (parts == null || parts.size() != 4) {
             logger.error("Error parsing line: " + line);
