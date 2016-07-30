@@ -26,6 +26,9 @@ import javafx.util.StringConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -255,6 +258,27 @@ public class App extends Application implements LapListener {
       lapTime.setHeat(this.currentHeat);
       this.currentHeat.getLapTimes().add(lapTime);
     }
+
+    playSound();
+  }
+
+
+  public static synchronized void playSound() {
+    new Thread(new Runnable() {
+      // The wrapper thread is unnecessary, unless it blocks on the
+      // Clip finishing; see comments.
+      public void run() {
+        try {
+          Clip clip = AudioSystem.getClip();
+          AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                  App.class.getResourceAsStream("/beep-02.wav"));
+          clip.open(inputStream);
+          clip.start();
+        } catch (Exception e) {
+          System.err.println(e.getMessage());
+        }
+      }
+    }).start();
   }
 
   @Override
